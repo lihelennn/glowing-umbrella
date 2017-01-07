@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang ="en">
   <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    var currentLocation = [];
+
+				function getLocation() {
+          console.log("testing");
+					if (navigator.geolocation) {
+            console.console.log("checking current location");
+						navigator.geolocation.getCurrentPosition(showPosition);
+					} else {
+						console.log("Geolocation not supported by your browser");
+					}
+				}
+
+
+				function showPosition(coord) {
+					currentLocation=[];
+					currentLocation.push(Math.round(((coord.coords.latitude)*1000000)/1000000));
+					currentLocation.push(Math.round(((coord.coords.longitude)*1000000)/1000000));
+					//alert("showPosition" + currentLocation);
+					//alert(currentLocation[0]);
+					//alert(currentLocation[1]);
+				}
+
+        $.post( "/home", {
+          javascript_data: [1,1]
+        });
+
+
+    </script>
+
     <title>Glowing Umbrella</title>
   </head>
   <body background="static/climate-change.jpg">
     <form>
-      <input type="submit" value="I'm here">
+      <button onclick="getLocation()" type="submit" name="submit">I'm here</button>
     </form>
   </body>
 </html>
