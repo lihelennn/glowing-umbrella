@@ -39,20 +39,28 @@ def climate():
         temperature = 0
         latitude = request.args.get("lat")
         longitude = request.args.get("lon")
+        urlZip = "http://ziplocate.us/api/v1/reverse/latitude,longitude"
+        urlZip=urlZip.replace("latitude", latitude)
+        urlZip=urlZip.replace("longitude", longitude)
+        req = urllib2.urlopen(urlZip)
+        result = req.read()
+        r = json.loads(result)
+        zipcode = r["zip"]
+
         #use api to search location
         #load information into climate
 
-        url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
-        url=url.replace("latitude", latitude)
-        url=url.replace("longitude", longitude)
-        req = urllib2.urlopen(url)
-        result = req.read()
-        r = json.loads(result)
-        for key in r.keys():
-            if key == "main":
-                main = r[key]
-                temperature = main['temp']
-                return render_template("climate.html",temperature=temperature, msg=msg, info=info)
+        #url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
+        #url=url.replace("latitude", latitude)
+        #url=url.replace("longitude", longitude)
+        #req = urllib2.urlopen(url)
+        #result = req.read()
+        #r = json.loads(result)
+        #for key in r.keys():
+        #    if key == "main":
+        #        main = r[key]
+        #        temperature = main['temp']
+        #        return render_template("climate.html",temperature=temperature, msg=msg, info=info)
     else:
         tempAvg2015=""
         tempAvg2010=""
