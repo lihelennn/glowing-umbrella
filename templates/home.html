@@ -25,10 +25,8 @@
       var currentLocation = [];
 
 			function getLocation() {
-        alert("testing");
 
 				if (navigator.geolocation) {
-          console.console.log("checking current location");
 					navigator.geolocation.getCurrentPosition(showPosition);
 				} else {
 					console.log("Geolocation not supported by your browser");
@@ -36,10 +34,13 @@
 			}
 
 
-			function showPosition(coord) {
+			var showPosition = function(coord){
 				currentLocation=[];
-				currentLocation.push(Math.round(((coord.coords.latitude)*1000000)/1000000));
-				currentLocation.push(Math.round(((coord.coords.longitude)*1000000)/1000000));
+        alert("show position function");
+				currentLocation.push(coord.coords.latitude);
+				currentLocation.push(coord.coords.longitude);
+
+        alert(currentLocation);
 				//alert("showPosition" + currentLocation);
 				//alert(currentLocation[0]);
 				//alert(currentLocation[1]);

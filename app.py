@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 location=[]
 temperature=0
-fives = ["2015", "2010", "2005", "2000"]
+fives = ["2016", "2015", "2014", "2013", "2012", "2011", "2010", "2005", "2000"]
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def climate():
         #use api to search location
         #load information into climate
 
-        url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
+        url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
         url=url.replace("latitude", latitude)
         url=url.replace("longitude", longitude)
         req = urllib2.urlopen(url)
@@ -75,8 +75,18 @@ def climate():
             if r != []:
                 r = r[0]
                 for key in r.keys():
-                    if historyYear == "2015":
-                        tempAvg2015 = r[key]
+                    if historyYear == "2016":
+                        tempAvg2016 = r[key]
+                    elif historyYear == "2015":
+                        tempAvg2015= r[key]
+                    elif historyYear == "2014":
+                        tempAvg2014 = r[key]
+                    elif historyYear == "2013":
+                        tempAvg2013 = r[key]
+                    elif historyYear == "2012":
+                        tempAvg2012 = r[key]
+                    elif historyYear == "2011":
+                        tempAvg2011 = r[key]
                     elif historyYear == "2010":
                         tempAvg2010 = r[key]
                     elif historyYear == "2005":
@@ -85,7 +95,7 @@ def climate():
                         tempAvg2000 = r[key]
 
 
-        url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
+        url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
         url=url.replace("zipcode", zipcode)
         url=url.replace("countrycode", countrycode)
         req = urllib2.urlopen(url)
@@ -96,7 +106,7 @@ def climate():
                 main = r[key]
                 temperature = main['temp']
                 print "HELLO"
-                return render_template("climate.html",temperature=temperature, msg=msg, tempAvg2015=tempAvg2015, tempAvg2010=tempAvg2010, tempAvg2005=tempAvg2005,tempAvg2000=tempAvg2000, info=info)
+                return render_template("climate.html",temperature=temperature, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010, tempAvg2005=tempAvg2005,tempAvg2000=tempAvg2000, info=info)
         return render_template("home.html")
 
 

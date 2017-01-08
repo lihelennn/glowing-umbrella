@@ -30,10 +30,25 @@
 					</div>
           <button class="w3-btn-block w3-green" type="submit" name="submit" value="sub">Find temperatures</button>
         </form>
-
+        <p>"In Degrees Fahrenheit"
         <p>current temperature at your location: {{temperature}}</p>
+        {% if tempAvg2016 != "" %}
+        <p>2016 temperature at your location: {{tempAvg2016}}</p>
+        {% endif %}
         {% if tempAvg2015 != "" %}
         <p>2015 temperature at your location: {{tempAvg2015}}</p>
+        {% endif %}
+        {% if tempAvg2014 != "" %}
+        <p>2014 temperature at your location: {{tempAvg2014}}</p>
+        {% endif %}
+        {% if tempAvg2013 != "" %}
+        <p>2014 temperature at your location: {{tempAvg2013}}</p>
+        {% endif %}
+        {% if tempAvg2012 != "" %}
+        <p>2012 temperature at your location: {{tempAvg2012}}</p>
+        {% endif %}
+        {% if tempAvg2011 != "" %}
+        <p>2011 temperature at your location: {{tempAvg2011}}</p>
         {% endif %}
         {% if tempAvg2010 != "" %}
         <p>2010 temperature at your location: {{tempAvg2010}}</p>
