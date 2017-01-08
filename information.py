@@ -1,0 +1,8 @@
+import random
+
+#information is from www.epa.gov/climatechange/climate-change-basic-information
+information=["Our Earth is warming. Earth's average temperature has risen by 1.5 degree Fahrenheit over the past century, and is projected to rise another 0.5 to 8.6 degree Fahrenheit over the next hundred years. Small changes in the average temperature of the planet can translate to large and potentially dangerous shifts in climate and weather.","The evidence is clear. Rising global temperatures have been accompanied by changes in weather and climate. Many places have seen changes in rainfall, resulting in more floods, droughts, or intense rain, as well as more frequent and severe heat waves.","The planet's oceans and glaciers have also experienced some big changes - oceans are warming and becoming more acidic, ice caps are melting, and sea levels are rising. As these and other changes become more pronounced in the coming decades, they will likely present challenges to our society and our environment.","Global warming refers to the recent and ongoing rise in global average temperature near Earth's surface. It is caused mostly by increasing concentrations of greenhouse gases in the atmosphere. Global warming is causing climate patterns to change. However, global warming itself represents only one aspect of climate change.","Climate change refers to any significant change in the measures of climate lasting for an extended period of time. In other words, climate change includes major changes in temperature, precipitation, or wind patterns, among other effects, that occur over several decades or longer."]
+
+def getRandomInfo():
+    rand = random.randint(0,len(information)-1)
+    return information[rand]

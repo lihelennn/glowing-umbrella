@@ -6,10 +6,31 @@
   </head>
   <body>
     <form>
-      <input type="text" name="zip" value="zip" placeholder="10002">
-      <button type="submit" name="submit" value="Use this zip code">
+      <input type="text" name="zip" placeholder="10002">
+      <input type="text" name="country" placeholder="US">
+
+      <button type="submit" name="submit" value="sub">Use this zipcode instead</button>
     </form>
 
-    <p>{{temperature}}<p>
+    <p>current temperature at your location: {{temperature}}</p>
+    {% if tempAvg2015 != "" %}
+    <p>2015 temperature at your location: {{tempAvg2015}}</p>
+    {% endif %}
+    {% if tempAvg2010 != "" %}
+    <p>2010 temperature at your location: {{tempAvg2010}}</p>
+    {% endif %}
+    {% if tempAvg2005 != "" %}
+    <p>2005 temperature at your location: {{tempAvg2005}}</p>
+    {% endif %}
+    {% if tempAvg2000 != "" %}
+    <p>2000 temperature at your location: {{tempAvg2000}}</p>
+    {% endif %}
+
+    <p>{{info}}</p><br>
+    <button type="submit" name="information" value="information">Get other information</button>
+
+    <p>{{msg}}</p>
+
+
   </body>
 </html>
