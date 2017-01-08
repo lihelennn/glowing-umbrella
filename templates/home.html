@@ -8,6 +8,7 @@
 
 				function getLocation() {
           console.log("testing");
+
 					if (navigator.geolocation) {
             console.console.log("checking current location");
 						navigator.geolocation.getCurrentPosition(showPosition);
@@ -24,11 +25,17 @@
 					//alert("showPosition" + currentLocation);
 					//alert(currentLocation[0]);
 					//alert(currentLocation[1]);
+
+          $.post( "/climate", {
+            javascript_data: currentLocation
+          });
+
+          $.post( "/home", {
+            javascript_data: currentLocation
+          });
 				}
 
-        $.post( "/home", {
-          javascript_data: [1,1]
-        });
+
 
 
     </script>
@@ -37,7 +44,7 @@
   </head>
   <body background="static/climate-change.jpg">
     <form>
-      <button onclick="getLocation()" type="submit" name="submit">I'm here</button>
+      <button onclick="getLocation()" type="submit" name="submit" value="sub">I'm here</button>
     </form>
   </body>
 </html>
