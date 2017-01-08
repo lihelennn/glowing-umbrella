@@ -30,6 +30,7 @@
 
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(showPosition);
+          console.log("getting position")
 				} else {
 					console.log("Geolocation not supported by your browser");
 				}
@@ -37,11 +38,10 @@
 
 
 			var showPosition = function(coord){
+        alert("showpostionpls")
 				currentLocation=[];
-        alert("show position function");
 				currentLocation.push(coord.coords.latitude);
 				currentLocation.push(coord.coords.longitude);
-
         alert(currentLocation);
 				//alert("showPosition" + currentLocation);
 				//alert(currentLocation[0]);
@@ -54,6 +54,7 @@
           url: "home",
           data: currentLocation,
           success: function(data, textStatus) {
+              alert("success!")
               console.log("AJAX TESTING")
           }
         });

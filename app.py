@@ -15,10 +15,13 @@ def home():
         print "yooyooooo"
         return render_template("home.html")
     else:
+        print "request form data"
         #location = [30, -10]
-        location = request.form["javascript_data"]
+        location = request.form["data"]
+        print location
         if location == None:
             location = [40.71, -74.01]
+            print "hello"
             msg = "We cannot detect where you are, but here are the temperatures for 10002, USA"
             return redirect(url_for('climate',lat=location[0], lon=location[1], msg=msg))
         return redirect(url_for('climate',lat=location[0], lon=location[1]))
@@ -59,7 +62,6 @@ def climate():
         #c.request("HEAD", '')
         #print c.getresponse().status
         #if c.getresponse().status < 400:
-        #    print "YOOOOO"
         try:
             urlZip="http://ziplocate.us/api/v1/reverse/latitude,longitude"
             urlZip=urlZip.replace("latitude", latitude)
