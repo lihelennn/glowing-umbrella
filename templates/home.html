@@ -2,6 +2,22 @@
 <html lang ="en">
   <head>
 
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <style>
+      body {
+        font-family: 'Lato', sans-serif;
+        position: relative;
+      }
+      html {
+        background: url("static/climate-change.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type=text/javascript>
 
@@ -60,9 +76,13 @@
 
     <title>Glowing Umbrella</title>
   </head>
-  <body background="static/climate-change.jpg">
-    <form>
-      <button id="imHere" type="submit" name="submit" value="sub">I'm here</button>
-    </form>
+  <body>
+    <!--<div class="w3-display-container">-->
+      <div class="w3-container w3-content w3-display-container" style="margin-top:150px;">
+        <form method="get">
+          <button id="imHere" value="sub" class="w3-btn w3-round w3-red w3-hover-green w3-padding-xlarge w3-xxlarge w3-display-middle" onclick="getLocation()" type="submit" name="submit"><b>I'm here!</b></button>
+        </form>
+      </div>
+    <!--</div>-->
   </body>
 </html>
