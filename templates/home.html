@@ -26,49 +26,46 @@
 
       var currentLocation = [];
 
-			function getLocation() {
+      var showPosition = function(coord){
+        alert("showpostionpls");
+        currentLocation=[];
+        currentLocation.push(coord.coords.latitude);
+        currentLocation.push(coord.coords.longitude);
+        alert(currentLocation);
+        window.location.assign("/climate/lat="+currentLocation[0]+"&lon="+currentLocation[1]+"&msg=");
+
+
+
+        $.ajax({
+          type: "GET",
+          url: "/home",
+          data: currentLocation,
+          success: function(data) {
+              alert("success!");
+              console.log("AJAX TESTING");
+          },
+          error: function(data){
+            alert("error");
+          }
+        });
+
+      }
+
+
+      function errorCallback(){
+        alert("this ain't workin");
+      }
+
+      function getLocation() {
 
 				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(showPosition);
-          console.log("getting position")
+					navigator.geolocation.getCurrentPosition(showPosition,errorCallback,{timeout:10000})
 				} else {
 					console.log("Geolocation not supported by your browser");
 				}
 			}
 
 
-			var showPosition = function(coord){
-        alert("showpostionpls")
-				currentLocation=[];
-				currentLocation.push(coord.coords.latitude);
-				currentLocation.push(coord.coords.longitude);
-        alert(currentLocation);
-				//alert("showPosition" + currentLocation);
-				//alert(currentLocation[0]);
-				//alert(currentLocation[1]);
-        console.log("javascript testing")
-        console.log(currentLocation)
-
-        $.ajax({
-          type: "POST",
-          url: "home",
-          data: currentLocation,
-          success: function(data, textStatus) {
-              alert("success!")
-              console.log("AJAX TESTING")
-          }
-        });
-
-        /*
-        $.post( "/climate", {
-          javascript_data: [35,139]
-        });
-
-        $.post( "/home", {
-          javascript_data: [35,139]
-        });
-        */
-			}
 
 
       $("#imHere").click(getLocation);

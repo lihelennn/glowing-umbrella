@@ -11,28 +11,37 @@ fives = ["2016", "2015", "2014", "2013", "2012", "2011", "2010", "2005", "2000"]
 @app.route('/index', methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
+    msg=""
     if request.args.get("submit") != "sub":
-        print "yooyooooo"
         return render_template("home.html")
     else:
-        print "request form data"
-        #location = [30, -10]
-        location = request.form["data"]
-        print location
-        if location == None:
-            location = [40.71, -74.01]
-            print "hello"
-            msg = "We cannot detect where you are, but here are the temperatures for 10002, USA"
+        if request.args.get("data") != None:
+            location = request.args.get("data")
             return redirect(url_for('climate',lat=location[0], lon=location[1], msg=msg))
-        return redirect(url_for('climate',lat=location[0], lon=location[1]))
+        else:
+            print "this is da worst"
+            return redirect(url_for('climate',lat=30, lon=-100, msg="Loading for something else"))
+
+
+    #     print "request form data"
+    #     #location = [30, -10]
+    # location = request.args.get("data")
+    #     print location
+    #     #if location == None:
+    #     #    location = [40.71, -74.01]
+    #     #    print "hello"
+    #     #    msg = "We cannot detect where you are, but here are the temperatures for 10002, USA"
+    #     #    return redirect(url_for('climate',lat=location[0], lon=location[1], msg=msg))
+        #return redirect(url_for('climate',lat=location[0], lon=location[1], msg=msg))
 
 
 #use api to search location
 #load information into climate
 #loads the current/past temperatures of the location
-@app.route('/climate', methods=['GET', 'POST'])
+@app.route('/climate')
 def climate():
-    msg=""
+    #location = request.form["data"]
+    msg=request.args.get("msg")
     tempAvg2016=""
     tempAvg2015=""
     tempAvg2014=""
@@ -43,13 +52,11 @@ def climate():
     tempAvg2005=""
     tempAvg2000=""
     info = information.getRandomInfo()
+
+    #if user requests new info...this does not work yet
     if request.args.get("information") == "information":
         info = information.getRandomInfo()
 
-    if request.args.get("msg") == "We cannot detect where you are, but here are the temperatures for 10002, USA":
-        msg = "We cannot detect where you are, but here are the temperatures for 10002, USA"
-    else:
-        msg = ""
     if request.args.get("submit") != "sub":
         temperature = 0
         latitude = request.args.get("lat")
@@ -118,11 +125,7 @@ def climate():
                 return render_template("climate.html",temperature=temperature, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010, tempAvg2005=tempAvg2005,tempAvg2000=tempAvg2000, info=info)
     else:
         zipcode=request.args.get("zip")
-        #if zipcode == "":
-        #    msg = "please submit a zipcode"
         countrycode=request.args.get("country")
-        #if countrycode == "":
-        #    msg = "please submit a country code"
         for i in range(len(fives)):
             historyYear = fives[i]
             urlHistory= "https://api.weathersource.com/v1/5f7b808d57d0226ddfa9/history_by_postal_code.json?period=day&postal_code_eq=zipcode&country_eq=US&timestamp_eq=YEAR-02-02-10T00:00:00-05:00&fields=tempAvg"
@@ -152,7 +155,6 @@ def climate():
                         tempAvg2005 = r[key]
                     elif historyYear == "2000":
                         tempAvg2000 = r[key]
-
 
         url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
         url=url.replace("zipcode", zipcode)
