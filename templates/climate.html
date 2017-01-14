@@ -32,7 +32,12 @@
 					</div>
           <button class="w3-btn-block w3-green" type="submit" name="submit" value="sub">Find temperatures</button>
         </form>
+        {% if todayDate != "" %}
+        <p> {{todayDate}} </p>
+        {% endif %}
+        {% if temperature != "" %}
         <p>current temperature at your location: {{temperature}}&deg;F</p>
+        {% endif %}
         {% if tempAvg2016 != "" %}
         <p>2016 temperature at your location: {{tempAvg2016}}&deg;F</p>
         {% endif %}
@@ -54,16 +59,14 @@
         {% if tempAvg2010 != "" %}
         <p>2010 temperature at your location: {{tempAvg2010}}&deg;F</p>
         {% endif %}
-        {% if tempAvg2005 != "" %}
-        <p>2005 temperature at your location: {{tempAvg2005}}&deg;F</p>
-        {% endif %}
-        {% if tempAvg2000 != "" %}
-        <p>2000 temperature at your location: {{tempAvg2000}}&deg;F</p>
+
+        {% if info != "" %}
+        <p> {{info}} </p>
         {% endif %}
 
-        <p>{{info}}</p><br>
-
+        {% if msg != "" %}
         <p>{{msg}}</p>
+        {% endif %}
 
         <button class="w3-btn-block w3-green" type="submit" name="information" value="information">Get other information</button>
 

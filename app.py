@@ -1,11 +1,11 @@
-import urllib2,json, information
+import urllib2, json, time, information
 
 from flask import Flask, render_template, url_for, session, request, redirect
 app = Flask(__name__)
 
 location=[]
 temperature=0
-fives = ["2016", "2015", "2014", "2013", "2012", "2011", "2010", "2005", "2000"]
+fives = ["2016", "2015", "2014", "2013", "2012", "2011", "2010"]
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -41,8 +41,6 @@ def climate():
     tempAvg2012=""
     tempAvg2011=""
     tempAvg2010=""
-    tempAvg2005=""
-    tempAvg2000=""
     info = information.getRandomInfo()
 
     #if user requests new info...this does not work yet
@@ -97,10 +95,6 @@ def climate():
                         tempAvg2011 = r[key]
                     elif historyYear == "2010":
                         tempAvg2010 = r[key]
-                    elif historyYear == "2005":
-                        tempAvg2005 = r[key]
-                    elif historyYear == "2000":
-                        tempAvg2000 = r[key]
     except:
             print "Something went wrong"
 
@@ -117,7 +111,7 @@ def climate():
             if key == "main":
                 main = r[key]
                 temperature = main['temp']
-                return render_template("climate.html",todayDate=todayDate,temperature=temperature, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010, tempAvg2005=tempAvg2005,tempAvg2000=tempAvg2000, info=info)
+                return render_template("climate.html", todayDate=todayDate, temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
     else:
         url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
         url=url.replace("zipcode", zipcode)
@@ -129,7 +123,7 @@ def climate():
             if key == "main":
                 main = r[key]
                 temperature = main['temp']
-                return render_template("climate.html",todayDate=todayDate,temperature=temperature, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010, tempAvg2005=tempAvg2005,tempAvg2000=tempAvg2000, info=info)
+                return render_template("climate.html", todayDate=todayDate,temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
     return render_template("home.html")
 
 
