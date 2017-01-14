@@ -29,6 +29,7 @@ def home():
 @app.route('/climate')
 def climate():
     #location = request.form["data"]
+    loadedSomeData = False
     todayDate = time.strftime("%m-%d")
     zipcodeGiven = False
     msg=request.args.get("msg")
@@ -69,15 +70,18 @@ def climate():
         for i in range(len(fives)):
             historyYear = fives[i]
 
-            urlHistory= "https://api.weathersource.com/v1/5f7b808d57d0226ddfa9/history_by_postal_code.json?period=day&postal_code_eq=zipcode&country_eq=US&timestamp_eq=YEAR-DAYT00:00:00-05:00&fields=tempAvg"
-            urlHistory=urlHistory.replace("zipcode", zipcode)
-            urlHistory=urlHistory.replace("YEAR", historyYear)
-            urlHistory=urlHistory.replace("DAY", todayDate)
-            print urlHistory
+            try:
+                urlHistory= "https://api.weathersource.com/v1/5f7b808d57d0226ddfa9/history_by_postal_code.json?period=day&postal_code_eq=zipcode&country_eq=US&timestamp_eq=YEAR-DAYT00:00:00-05:00&fields=tempAvg"
+                urlHistory=urlHistory.replace("zipcode", zipcode)
+                urlHistory=urlHistory.replace("YEAR", historyYear)
+                urlHistory=urlHistory.replace("DAY", todayDate)
 
-            req = urllib2.urlopen(urlHistory)
-            result = req.read()
-            r = json.loads(result)
+                req = urllib2.urlopen(urlHistory)
+                result = req.read()
+                r = json.loads(result)
+            except:
+                if not loadedSomeData:
+                    msg+="No history for that zip code."
             if r != []:
                 r = r[0]
                 for key in r.keys():
@@ -95,35 +99,43 @@ def climate():
                         tempAvg2011 = r[key]
                     elif historyYear == "2010":
                         tempAvg2010 = r[key]
+                    loadedSomeData = True
     except:
             print "Something went wrong"
 
     todayDate = time.strftime("%A, %B %d, %Y")
 
     if not zipcodeGiven:
-        url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
-        url=url.replace("latitude", latitude)
-        url=url.replace("longitude", longitude)
-        req = urllib2.urlopen(url)
-        result = req.read()
-        r = json.loads(result)
-        for key in r.keys():
-            if key == "main":
-                main = r[key]
-                temperature = main['temp']
-                return render_template("climate.html", todayDate=todayDate, temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
+        try:
+            url="http://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
+            url=url.replace("latitude", latitude)
+            url=url.replace("longitude", longitude)
+            req = urllib2.urlopen(url)
+            result = req.read()
+            r = json.loads(result)
+
+            for key in r.keys():
+                if key == "main":
+                    main = r[key]
+                    temperature = main['temp']
+                    return render_template("climate.html", todayDate=todayDate, temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
+        except:
+            msg+="No data for your current location."
     else:
-        url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
-        url=url.replace("zipcode", zipcode)
-        url=url.replace("countrycode", countrycode)
-        req = urllib2.urlopen(url)
-        result = req.read()
-        r = json.loads(result)
-        for key in r.keys():
-            if key == "main":
-                main = r[key]
-                temperature = main['temp']
-                return render_template("climate.html", todayDate=todayDate,temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
+        try:
+            url="http://api.openweathermap.org/data/2.5/weather?zip=zipcode,countrycode&units=imperial&appid=48d99f11447bdb9eeecf3dc47ecc0f57"
+            url=url.replace("zipcode", zipcode)
+            url=url.replace("countrycode", countrycode)
+            req = urllib2.urlopen(url)
+            result = req.read()
+            r = json.loads(result)
+            for key in r.keys():
+                if key == "main":
+                    main = r[key]
+                    temperature = main['temp']
+                    return render_template("climate.html", todayDate=todayDate,temperature=temperature, info=info, msg=msg, tempAvg2016=tempAvg2016,tempAvg2015=tempAvg2015, tempAvg2014=tempAvg2014, tempAvg2013=tempAvg2013, tempAvg2012=tempAvg2012, tempAvg2011=tempAvg2011,tempAvg2010=tempAvg2010)
+        except:
+            msg+="No data for that zipcode."
     return render_template("home.html")
 
 
