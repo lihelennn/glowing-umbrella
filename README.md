@@ -3,4 +3,4 @@ Designed by Shannon Lau and Helen Li at Social Hacks to tackle prevalent issues 
 
 ### bugsbugsbugsgusbgsubsubugbsugbsugbubgugs
 1. Issues with the API
-..*Temperature search sometimes dysfunctional 
+  * Temperature search sometimes dysfunctional 
