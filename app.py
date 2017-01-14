@@ -19,7 +19,7 @@ def home():
             location = request.args.get("data")
             return redirect(url_for('climate',lat=location[0], lon=location[1], msg=msg))
         else:
-            print "no it is not :)"
+            print "no it is not"
             return redirect(url_for('climate',lat=30, lon=-100, msg="Loading for something else"))
 
 
