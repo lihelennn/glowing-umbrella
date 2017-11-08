@@ -1,15 +1,15 @@
 # Glowing Umbrella
 Designed by Shannon Lau (@slau8) and Helen Li (@lihelennn) at Social Hacks to tackle prevalent issues in climate change. January 7-8, 2017.
 
-### Goal
+## Goal
 This web app is a weather application platform to quickly check the weather in your location, as well as any specified location. It additionally provides the temperature and conditions of that day from 10 years ago and every year since. This feature gives insight to the climate fluctuations over the years and demonstrates climate change as an issue that really affects us all.
 
-### Dependencies
+## Dependencies
 - Python 2.7
 - Flask
 - HTML/CSS
 
-### Launching the Program
+## Launching the Program
 
 ##### Installing Your Virtual Environment/Flask
 Flask needs to be installed in order to run this program. It is ideally stored in a virtual environment (venv). 
@@ -42,5 +42,5 @@ $ python app.py
 ```
 You can then view the webpage by opening the URL `localhost:5000` in a web browser.
 
-### Issues
+## Issues
 This project has not been completed and there are existing bugs with the API and climate search feature.
