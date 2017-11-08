@@ -11,7 +11,7 @@ This web app is a weather application platform to quickly check the weather in y
 
 ## Launching the Program
 
-##### Installing Your Virtual Environment/Flask
+#### Installing Your Virtual Environment/Flask
 Flask needs to be installed in order to run this program. It is ideally stored in a virtual environment (venv). 
 
 To install a venv (with the name <name>), run these commands in your terminal:
@@ -30,7 +30,7 @@ On Windows:
 $ . <name>/Script/activate
 ```
 
-##### Run It!
+#### Run It!
 Clone the repo by running:
 ```
 $ git clone https://github.com/lihelennn/glowing-umbrella.git
