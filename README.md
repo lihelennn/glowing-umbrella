@@ -19,7 +19,6 @@ To install a venv (with the name <name>), run these commands in your terminal:
 ```
 $ pip install virtualenv
 $ virtualenv <name>
-
 ```
 On Mac/Linux, start up your venv with:
 ```
