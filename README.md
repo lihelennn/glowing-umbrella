@@ -1,5 +1,5 @@
 # Glowing Umbrella
-Designed by Shannon Lau (@slau8) and Helen Li (@lihelennn) at Social Hacks to tackle prevalent issues in climate change. January 7-8, 2017.
+Designed by Shannon Lau ([`@slau8`](https://github.com/slau8)) and Helen Li ([`@lihelennn`](https://github.com/lihelennn)) at Social Hacks to tackle prevalent issues in climate change. January 7-8, 2017.
 
 _**NOTE: This project has not been completed and there are existing bugs with the API and climate search feature. It will not run at the moment.**_
 
